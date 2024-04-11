@@ -72,7 +72,7 @@ int initialise_board(int **initial_board, int x, int y, int num_of_mine) {
     return 0;
 }
 ///*
-void display(int ** &board, int x, int y, bool die){
+void display(int ** &board, int x, int y, bool die, bool win){
     int value, i, j;
     cout << "\n    |";
     for (i=0; i<y; i++) cout<<setw(3)<<i;   cout<<"\n  ---";
@@ -101,7 +101,10 @@ void display(int ** &board, int x, int y, bool die){
                     else cout << " 🚩";  // 插旗子
                 }
                 
-                else cout<<"  ?";        // 平地（没挖过的）
+                else {
+                     if (win!=1)   cout<<"  ?";        // 平地（没挖过的）
+                     else cout<<"  "<<board[i][j];
+                }
             }
             cout<<endl;
         }//print test(to be delete)
@@ -143,22 +146,38 @@ bool processing(int ** &board, int &x_max, int &y_max, char &mode, int x, int y)
     return 0;
 }
 
+bool win(int **board, int x, int y) {
+    for (int i=0; i<x; ++i){
+        for (int j=0; j<y; ++j){
+            if (board[i][j]==9)
+                return 0;
+        }
+    }
+    return 1;
+}
 
 
 int main() {
 // customer input (separate function??) //
+    string xyl;
     int x=1, y=1, level=0;    
     while( y<3 || y>300 ){
         cout << "The width of the board (3-300): ";
-        cin >> y;
+        cin>>xyl;
+        istringstream iss(xyl);
+        iss >> y;
     }
     while( x<3 || x>300 ){
         cout << "The height of the board (3-300): ";
-        cin >> x;
+        cin>>xyl;
+        istringstream iss(xyl);
+        iss >> x;
     }
     while ( level<1 || level>10 ){
         cout << "Choose a level (1-10):";
-        cin >> level;
+        cin>>xyl;
+        istringstream iss(xyl);
+        iss >> level;
     }
     int num_of_mine = 0.1*level*x*y/5; //set 地雷 value
     if (num_of_mine<1){ //set minimum 地雷 value
@@ -175,22 +194,42 @@ int main() {
 //  //
 
     
-    display(initial_board, x, y, 0);
+    display(initial_board, x, y, 0, 0);
 
     //test input
+    string temp;
     char mode;
-    int input_x, input_y;
+    int input_x=999, input_y=999;
     bool die = 0, valid=0;
     //cout<<"max_x: "<<y<<", max_y: "<<x<<endl;
     cout<<"enter the mode and the coordinates! modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e 12 13)\n";
-    while(cin>>mode){
+    while(getline(cin,temp)){
+        istringstream iss(temp);
+        iss >> mode >> input_x >> input_y;
+        if (mode != 'q' && mode != 'e' && mode != 'f'){
+            cout<<"Please enter a valid mode"<<endl;
+            input_x=999;
+            input_y=999;
+            continue;
+        }
+        else if (mode != 'q' && (input_x < 0 || input_x >= y || input_y < 0 || input_y >= x)){
+            cout<<"Please enter a valid coordinates"<<endl;
+            input_x=999;
+            input_y=999;
+            continue;
+        }
         if(mode=='q'){
             cout << "Bye\n";
             break;
         }
-        cin >> input_x >> input_y;
+        
         die = processing(initial_board, y, x, mode, input_x, input_y);
-        display(initial_board, x, y, die);
+        if(die !=1 && win(initial_board,x,y)==1){
+            display(initial_board, x, y, die, win);
+            cout << "you win\n";
+            break;
+        }
+        display(initial_board, x, y, die, 0);
         if(die){
             cout << "cai jiu duo lian\n";
             break;
