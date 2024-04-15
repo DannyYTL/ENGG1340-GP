@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <string>
 #include <random>
+#include <sstream>
 
 using namespace std;
 
