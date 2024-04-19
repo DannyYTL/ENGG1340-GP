@@ -1,7 +1,9 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <sstream>
 #include <random>
+#include <fstream>
 
 using namespace std;
 
@@ -75,7 +77,7 @@ int initialise_board(int **initial_board, int x, int y, int num_of_mine) {
 void display(int ** &board, int x, int y, bool die, bool win){
     int value, i, j;
     cout << "\n    |";
-    for (i=0; i<y; i++) cout<<setw(3)<<i;   cout<<"\n  ---";
+    for (i=0; i<y; i++) cout<<setw(3)<<i;   cout<<"\n  ---"; 
     for (i=0; i<y; i++) cout<<"---";        cout<<endl;
     for (i=0; i<x; ++i){//print test(to be delete)e
             cout<<setw(3)<<i<<" |";
@@ -102,11 +104,12 @@ void display(int ** &board, int x, int y, bool die, bool win){
                 }
                 
                 else {
-                     if (win!=1)   cout<<"  ?";        // 平地（没挖过的）
+                     if (win!=1)   cout<<"  ∎";        // 平地（没挖过的）
                      else cout<<"  "<<board[i][j];
                 }
             }
             cout<<endl;
+
         }//print test(to be delete)
 }
 //*/
@@ -114,6 +117,8 @@ void display(int ** &board, int x, int y, bool die, bool win){
 bool processing(int ** &board, int &x_max, int &y_max, char &mode, int x, int y){  // x: hor, y: ver,
     // mode: 'e': exacavate; 'f': flag; 'q': quit
     int value;
+    ofstream fout;
+    fout.open("Record.txt", ios::app);
     if(x>=0 && x<x_max && y>=0 && y<y_max){
         value = board[y][x];
         //cout<<"value: "<<value<<endl;  // test///////////
@@ -141,8 +146,14 @@ bool processing(int ** &board, int &x_max, int &y_max, char &mode, int x, int y)
             else board[y][x] += 10; // 拔旗子
             return 0;
         }
-        
     }
+    for (int i = 0; i < x; i++) {
+        for (int j = 0; j < y; j++) {
+            fout << board[i][j] << " ";
+        }
+        fout << endl;
+    }
+    fout.close();
     return 0;
 }
 
@@ -159,85 +170,114 @@ bool win(int **board, int x, int y) {
 
 int main() {
 // customer input (separate function??) //
+    string options;
     string xyl;
-    int x=1, y=1, level=0;    
-    while( y<3 || y>300 ){
-        cout << "The width of the board (3-300): ";
-        cin>>xyl;
-        istringstream iss(xyl);
-        iss >> y;
-    }
-    while( x<3 || x>300 ){
-        cout << "The height of the board (3-300): ";
-        cin>>xyl;
-        istringstream iss(xyl);
-        iss >> x;
-    }
-    while ( level<1 || level>10 ){
-        cout << "Choose a level (1-10):";
-        cin>>xyl;
-        istringstream iss(xyl);
-        iss >> level;
-    }
-    int num_of_mine = 0.1*level*x*y/5; //set 地雷 value
-    if (num_of_mine<1){ //set minimum 地雷 value
-        num_of_mine=1;
-    }
-// //
-// initialise_board //
-    int **initial_board = new int*[x];
-    for ( int i=0; i<x; ++i){
-        initial_board[i] = new int[y];
-    }
-
-    initialise_board(initial_board, x, y, num_of_mine);
-//  //
-
-    
-    display(initial_board, x, y, 0, 0);
-
-    //test input
-    string temp;
-    char mode;
-    int input_x=999, input_y=999;
-    bool die = 0, valid=0;
-    //cout<<"max_x: "<<y<<", max_y: "<<x<<endl;
-    cout<<"enter the mode and the coordinates! modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e 12 13)\n";
-    while(getline(cin,temp)){
-        istringstream iss(temp);
-        iss >> mode >> input_x >> input_y;
-        if (mode != 'q' && mode != 'e' && mode != 'f'){
-            cout<<"Please enter a valid mode"<<endl;
-            input_x=999;
-            input_y=999;
-            continue;
+    int x=1, y=1, level=0;  
+    cout << "what you want to do?\n New Game: N\n Load Game: L\n";
+    cin >> options;  
+    if (options == "N") {
+        while( y<3 || y>300 ){
+            cout << "The width of the board (3-300): ";
+            cin>>xyl;
+            istringstream iss(xyl);
+            iss >> y;
         }
-        else if (mode != 'q' && (input_x < 0 || input_x >= y || input_y < 0 || input_y >= x)){
-            cout<<"Please enter a valid coordinates"<<endl;
-            input_x=999;
-            input_y=999;
-            continue;
+        while( x<3 || x>300 ){
+            cout << "The height of the board (3-300): ";
+            cin>>xyl;
+            istringstream iss(xyl);
+            iss >> x;
         }
-        if(mode=='q'){
-            cout << "Bye\n";
-            break;
+        while ( level<1 || level>10 ){
+            cout << "Choose a level (1-10):";
+            cin>>xyl;
+            istringstream iss(xyl);
+            iss >> level;
         }
+        int num_of_mine = 0.1*level*x*y/5; //set 地雷 value
+        if (num_of_mine<1){ //set minimum 地雷 value
+            num_of_mine=1;
+        }
+    // //
+    // initialise_board //
+        int **initial_board = new int*[x];
+        for ( int i=0; i<x; ++i){
+            initial_board[i] = new int[y];
+        }
+
+        initialise_board(initial_board, x, y, num_of_mine);
+    //  //
+
         
-        die = processing(initial_board, y, x, mode, input_x, input_y);
-        if(die !=1 && win(initial_board,x,y)==1){
-            display(initial_board, x, y, die, win);
-            cout << "you win\n";
-            break;
-        }
-        display(initial_board, x, y, die, 0);
-        if(die){
-            cout << "cai jiu duo lian\n";
-            break;
-        }
-        cout<<"enter the mode and the coordinates! modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e 12 13)\n";
-    }
-    cout << "end testing"<<endl;
-   
+        display(initial_board, x, y, 0, 0);
 
+        //test input
+        string temp;
+        char mode;
+        int input_x=999, input_y=999;
+        bool die = 0, valid=0;
+        //cout<<"max_x: "<<y<<", max_y: "<<x<<endl;
+    
+        cout<<"enter the mode and the coordinates!" << endl;
+        cout << "modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";
+        while(getline(cin,temp)){
+            istringstream iss(temp);
+            iss >> mode >> input_x >> input_y;
+            if (mode != 'q' && mode != 'e' && mode != 'f'){
+                cout<<"Please enter a valid mode"<<endl;
+                input_x=999;
+                input_y=999;
+                continue;
+            }
+            else if (mode != 'q' && (input_x < 0 || input_x >= y || input_y < 0 || input_y >= x)){
+                cout<<"Please enter a valid coordinates"<<endl;
+                input_x=999;
+                input_y=999;
+                continue;
+            }
+            if(mode=='q'){
+                ofstream fout;
+                fout.open("Record.txt");
+                cout << "Bye\n";
+                break;
+            }
+            
+            die = processing(initial_board, y, x, mode, input_x, input_y);
+            if(die !=1 && win(initial_board,x,y)==1){
+                display(initial_board, x, y, die, win);
+                cout << "you win\n";
+                break;
+            }
+            display(initial_board, x, y, die, 0);
+            if(die){                                                                                                                                                                                       
+                   cout <<  "█     █       █    █         ██████            █      █        █     █                                      █      █    █     █  █                   █            \n"        
+                            "████████     ███████      █████████████        █████████      ████████            ████████████████         █████████    ███████████████     ████████████████      \n"                      
+                            " ████         ███      ████        █████        ████            ███               ████       ███████         ████        ███        ██       ████      ███████    \n"                     
+                            "  ████       ██      ████            ████       ████            ███                ███           ████      █ ████        ███         █       ███           ████   \n"                  
+                            "   ████     ██      ████              ████      ████            ███                ███            ████       ████        ███                 ███            ████  \n"                 
+                            "    ███    ███      ███               ████      ████            ██                 ███             ████      ████        ███       █         ███             ████ \n"                  
+                            "     ███   ██      ████                ████     ████            ██                 ███             ████      ████        ███      ██         ███             ████ \n"                  
+                            "     ████ ██       ████                ████     ████            ██                 ███              ███      ████        ███████████         ███              ████\n"                  
+                            "      █████        ████                ████     ████            ██                 ███             ████      ████        ███████████         ███              ████\n"                  
+                            "       ███         ████                ████     ████            ██                 ███             ████      ████        ███      ██         ███             ████ \n"                 
+                            "       ███          ████               ███       ███            ██                 ███             ████      ████        ███                 ███             ████ \n"                  
+                            "       ███          █████             ████       ███            ██                 ███            ████       ████        ███           █     ███            ████  \n"                  
+                            "       ███           █████           ████        ████          ██                  ███           ████        ████        ███          ██     ███           ████   \n"                  
+                            "       ████            █████       ████           █████      ████                  ████       ██████         ████        ████        ███     ████        █████    \n"                  
+                            "    ██████████           ████████████              ████████████  █              █████████████████         █████████   █████████████████   █████████████████       \n"                 
+                            "    ██      █               ██████                     █████                     █      █████              █      █    ██                  █     ██████           \n";                   
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                    
+                cout << "cai jiu duo lian\n";
+                break;
+            }
+            cout<<"enter the mode and the coordinates! modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";
+        }
+        cout << "end testing"<<endl;
+    }
+    //else if (options == "L") {
+
+    //}
     return 0;
 }
