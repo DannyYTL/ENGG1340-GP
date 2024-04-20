@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int initialise_board(int **initial_board, int x, int y, int num_of_mine) {
+void initialise_board(int **initial_board, int x, int y, int num_of_mine) {
 
         for ( int i=0; i<x; ++i){
         for ( int j=0; j<y; ++j){
@@ -70,13 +70,11 @@ int initialise_board(int **initial_board, int x, int y, int num_of_mine) {
         }
         cout<<endl;
         }//print test(to be delete)
-
-    return 0;
 }
 ///*
 void display(int ** &board, int x, int y, bool die, bool win){
     int value, i, j;
-    cout << "\n    |";
+    cout << "\n    |"; 
     for (i=0; i<y; i++) cout<<setw(3)<<i;   cout<<"\n  ---"; 
     for (i=0; i<y; i++) cout<<"---";        cout<<endl;
     for (i=0; i<x; ++i){//print test(to be delete)e
@@ -167,15 +165,25 @@ bool win(int **board, int x, int y) {
     return 1;
 }
 
-void save_to_file(string filename,int ** board) {
+void save_to_file(string filename,int ** board,int x,int y) {
     ofstream fout;
     fout.open(filename);
     if (fout.fail()) {
         cout << "Error in file opening" << endl;
     }
     else {
-
+        for (int i=0;i<x;i++) {
+            for (int j=0;j<y;j++) {
+                if (j != y-1) {
+                    fout << board[i][j] << " ";
+                }
+                else {
+                    fout << board[i][j] << endl;
+                }
+            }
+        }
     }
+    fout.close();
     return;
 }
 
