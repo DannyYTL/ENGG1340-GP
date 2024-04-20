@@ -260,8 +260,6 @@ int main() {
 
         initialise_board(initial_board, x, y, num_of_mine);
     //  //
-
-        
         display(initial_board, x, y, 0, 0);
 
         //test input
@@ -270,7 +268,6 @@ int main() {
         int input_x=999, input_y=999;
         bool die = 0, valid=0;
         //cout<<"max_x: "<<y<<", max_y: "<<x<<endl;
-    
         cout<<"enter the mode and the coordinates!" << endl;
         cout << "modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";
         while(getline(cin,temp)){
@@ -320,7 +317,6 @@ int main() {
                             "    ██      █               ██████                     █████                     █      █████              █      █    ██                  █     ██████           \n";                   
                                                                                                                                                                                                         
                                                                                                                                                                                                         
-                    
                 cout << "cai jiu duo lian\n";
                 break;
             }
