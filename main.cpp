@@ -167,6 +167,17 @@ bool win(int **board, int x, int y) {
     return 1;
 }
 
+void save_to_file(string filename,int ** board) {
+    ofstream fout;
+    fout.open(filename);
+    if (fout.fail()) {
+        cout << "Error in file opening" << endl;
+    }
+    else {
+
+    }
+    return;
+}
 
 int main() {
 // customer input (separate function??) //
@@ -236,8 +247,7 @@ int main() {
                 continue;
             }
             if(mode=='q'){
-                ofstream fout;
-                fout.open("Record.txt");
+                save_to_file("Record.txt",initial_board);
                 cout << "Bye\n";
                 break;
             }
