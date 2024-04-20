@@ -15,8 +15,6 @@ void initialise_board(int **initial_board, int x, int y, int num_of_mine) {
         }
     }
 
-
-
     int **random_pos = new int*[num_of_mine];
     for ( int i=0; i<num_of_mine; ++i){
         random_pos[i] = new int[2];
@@ -334,6 +332,8 @@ int main() {
         int ** initial_board;
         int x,y;
         initial_board = read_file("Record.txt",x,y);
+        x+=1;
+        y+=1;
         display(initial_board, x, y, 0, 0);
 
         //test input
