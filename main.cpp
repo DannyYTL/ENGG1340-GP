@@ -178,13 +178,22 @@ void save_to_file(string filename,int ** board,int x,int y) {
                     fout << board[i][j] << " ";
                 }
                 else {
-                    fout << board[i][j] << endl;
+                    if (i != x-1) {
+                        fout << board[i][j] << endl;
+                    }
+                    else {
+                        fout << board[i][j];
+                    }
                 }
             }
         }
     }
     fout.close();
     return;
+}
+
+void read_file(filename) {
+        
 }
 
 int main() {
@@ -294,8 +303,9 @@ int main() {
         }
         cout << "end testing"<<endl;
     }
-    //else if (options == "L") {
-
-    //}
+    else if (options == "L") {
+        read_file("Record.txt");
+        
+    }
     return 0;
 }
