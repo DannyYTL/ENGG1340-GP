@@ -291,10 +291,10 @@ int main() {
     string xyl;
     int x=1, y=1, level=0;  
     cout << "what you want to do?\n New Game: N\n Load Game: L\n";
-    cin >> options;
+    getline(cin,options);
     while (options != "N" && options != "L") {
         cout << "Invalid option, please choose again ( N - new game; L - continue from last game ): " << endl;
-        cin >> options;
+        getline(cin,options);
     }    
     if (options == "N") {
         while( y<3 || y>300 ){
