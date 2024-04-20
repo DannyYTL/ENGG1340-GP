@@ -116,19 +116,19 @@ bool processing(int ** &board, int &x_max, int &y_max, char &mode, int x, int y)
     ofstream fout;
     fout.open("Record.txt");
     if(x>=0 && x<x_max && y>=0 && y<y_max){
-        value = board[y][x];
+        value = board[x][y];
         //cout<<"value: "<<value<<endl;  // test///////////
-        if(value >= 10){  // wa guo de
+        if(value >= 10){  // excavated
             return 0;
         }
         if(mode == 'e'){
             if(value == 9){
                 cout<<"Booooooooom!\n";
-                board[y][x] = 99; // 葬身之地
+                board[x][y] = 99; // 葬身之地
                 return 1;
             }
             if (value >= 0){    // is a number (less than 10)
-                board[y][x]+=10;  // change state
+                board[x][y]+=10;  // change state
                 if (value == 0){
                     for(int i=-1, j; i<=1; i++){
                         for (j=-1; j<=1; j++) if(i!=0 || j!=0) processing(board, x_max, y_max, mode, x+i, y+j); 
@@ -138,8 +138,8 @@ bool processing(int ** &board, int &x_max, int &y_max, char &mode, int x, int y)
             }// value < 0 
             return 0;
         }if(mode == 'f'){
-            if (value>=0) board[y][x] -= 10;  // 插旗子
-            else board[y][x] += 10; // 拔旗子
+            if (value>=0) board[x][y] -= 10;  // 插旗子
+            else board[x][y] += 10; // 拔旗子
             return 0;
         }
     }
@@ -252,7 +252,7 @@ void in_main(int ** initial_board,int x,int y) {
                 break;
             }
             
-            die = processing(initial_board, y, x, mode, input_x, input_y);
+            die = processing(initial_board, x, y, mode, input_x, input_y);
             if(die !=1 && win(initial_board,x,y)==1){
                 display(initial_board, x, y, die, win);
                 cout << "you win\n";
