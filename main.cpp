@@ -192,10 +192,10 @@ void save_to_file(string filename,int ** board,int x,int y) {
     return;
 }
 
-int ** read_file(filename) {
+int ** read_file(string filename) {
         ifstream fin;
         string thisline;
-        int thisnum,x=-1,y=-1;
+        int thisnum,x=-1,y=-1,count=0;
         int ** board = new int*[300];
         for (int i=0; i<300; ++i){
             board[i] = new int[300];
@@ -206,9 +206,13 @@ int ** read_file(filename) {
         }
         else {
             while (getline(fin,thisline)) {
+                cout << count << "  " << thisline<< endl;
+                count += 1;
                 istringstream iss(thisline);
                 x += 1;
+                y = -1;
                 while (iss >> thisnum) {
+                    cout << thisnum << endl
                     y += 1;
                     board[x][y] = thisnum;
                 }
