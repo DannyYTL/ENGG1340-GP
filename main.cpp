@@ -192,8 +192,30 @@ void save_to_file(string filename,int ** board,int x,int y) {
     return;
 }
 
-void read_file(filename) {
-        
+int ** read_file(filename) {
+        ifstream fin;
+        string thisline;
+        int thisnum,x=-1,y=-1;
+        int ** board = new int*[300];
+        for (int i=0; i<300; ++i){
+            board[i] = new int[300];
+        }
+        fin.open(filename);
+        if (fin.fail()) {
+            cout << "Error in file opening." << endl;
+        }
+        else {
+            while (getline(fin,thisline)) {
+                istringstream iss(thisline);
+                x += 1;
+                while (iss >> thisnum) {
+                    y += 1;
+                    board[x][y] = thisnum;
+                }
+            }
+            fin.close();
+        }
+        return board;
 }
 
 int main() {
@@ -304,7 +326,7 @@ int main() {
         cout << "end testing"<<endl;
     }
     else if (options == "L") {
-        read_file("Record.txt");
+        initial_board = read_file("Record.txt");
         
     }
     return 0;
