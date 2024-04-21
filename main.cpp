@@ -99,7 +99,6 @@ void display(int ** &board, int x, int y, bool die, bool win){
                 }
             }
             cout<<endl;
-
         }//print test(to be delete)
 }
 //*/
@@ -207,12 +206,10 @@ int ** read_file(string filename,int &x,int &y) {
 }
 
 void in_main(int ** initial_board,int x,int y) {
-    //test input
         string temp;
         char mode;
         int input_x=999, input_y=999;
         bool die = 0, valid=0;
-        //cout<<"max_x: "<<y<<", max_y: "<<x<<endl;
     
         cout<<"enter the mode and the coordinates!" << endl;
         cout << "modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";
@@ -301,22 +298,18 @@ int main() {
             istringstream iss(xyl);
             iss >> level;
         }
-        int num_of_mine = 0.1*level*x*y/5; //set 地雷 value
-        if (num_of_mine<1){ //set minimum 地雷 value
+        int num_of_mine = 0.1*level*x*y/5;         //set 地雷 value
+        if (num_of_mine<1){                        //set minimum 地雷 value
             num_of_mine=1;
         }
-    // //
     // initialise_board //
         int **initial_board = new int*[x];
         for ( int i=0; i<x; ++i){
             initial_board[i] = new int[y];
         }
-
         initialise_board(initial_board, x, y, num_of_mine);
-    //  //
+    //                  //
         display(initial_board, x, y, 0, 0);
-
-        //test input
         in_main(initial_board,x,y);
     }
     else if (options == "L") {
