@@ -222,6 +222,7 @@ void in_main(int ** initial_board,int x,int y) {
     
         cout<<"enter the mode and the coordinates!" << endl;
         cout << "modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";
+        cin.ignore();
         while(getline(cin,temp)){
             istringstream iss(temp);
             iss >> mode >> input_x >> input_y;
