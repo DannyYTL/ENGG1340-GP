@@ -62,12 +62,6 @@ void initialise_board(int **initial_board, int x, int y, int num_of_mine) {
             }
         }
     }
-    for (int i=0; i<x; ++i){//print test(to be delete)
-        for (int j=0; j<y; ++j){
-            cout<<setw(3)<<initial_board[i][j];              
-        }
-        cout<<endl;
-        }//print test(to be delete)
 }
 ///*
 void display(int ** &board, int x, int y, bool die, bool win){
