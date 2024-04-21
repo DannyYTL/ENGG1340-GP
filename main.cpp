@@ -230,7 +230,7 @@ void in_main(int ** initial_board,int x,int y) {
         //cout<<"max_x: "<<y<<", max_y: "<<x<<endl;
     
         cout<<"enter the mode and the coordinates!" << endl;
-        cout << "modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";
+        cout << "modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e y-axis x-axis)\n";
         while(getline(cin,temp)){
             istringstream iss(temp);
             iss >> mode >> input_x >> input_y;
@@ -240,7 +240,7 @@ void in_main(int ** initial_board,int x,int y) {
                 input_y=999;
                 continue;
             }
-            else if (mode != 'q' && (input_x < 0 || input_x >= y || input_y < 0 || input_y >= x)){
+            else if (mode != 'q' && (input_x < 0 || input_x >= x || input_y < 0 || input_y >= y)){
                 cout<<"Please enter a valid coordinates"<<endl;
                 input_x=999;
                 input_y=999;
