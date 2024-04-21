@@ -141,12 +141,6 @@ bool processing(int ** &board, int &x_max, int &y_max, char &mode, int x, int y)
             return 0;
         }
     }
-    for (int i = 0; i < x; i++) {
-        for (int j = 0; j < y; j++) {
-            fout << board[i][j] << " ";
-        }
-        fout << endl; // record every move
-    }
     return 0;
 }
 
