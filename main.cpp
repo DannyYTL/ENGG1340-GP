@@ -113,8 +113,6 @@ void display(int ** &board, int x, int y, bool die, bool win){
 bool processing(int ** &board, int &x_max, int &y_max, char &mode, int x, int y){  // x: hor, y: ver,
     // mode: 'e': exacavate; 'f': flag; 'q': quit
     int value;
-    ofstream fout;
-    fout.open("Record.txt");
     if(x>=0 && x<x_max && y>=0 && y<y_max){
         value = board[x][y];
         //cout<<"value: "<<value<<endl;  // test///////////
@@ -149,7 +147,6 @@ bool processing(int ** &board, int &x_max, int &y_max, char &mode, int x, int y)
         }
         fout << endl; // record every move
     }
-    fout.close();
     return 0;
 }
 
