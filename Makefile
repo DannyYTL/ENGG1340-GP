@@ -24,9 +24,6 @@ win.o: win.cpp gaming.h
 in_main.o: in_main.cpp display.cpp processing.cpp win.cpp file.cpp gaming.h
 	g++ $(FLAGS) -c $<
 
-Record.txt:
-	echo > Record.txt
-
 $(TARGET): $(OBJECTS)
 	g++ $(FLAGS) $(OBJECTS) -o $(TARGET)
 	./main
