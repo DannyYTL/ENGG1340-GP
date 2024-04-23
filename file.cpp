@@ -4,7 +4,7 @@
 // input parameters: the filename of external file to be used, string type; a pointer to a 2D array of int pointers, stores the content of game board (dynamic memory management)
 //                  int x is the height of game board, int y is the width of game board
 // no return type, this function just stores the game board
-void save_to_file(string filename,int ** board,int x,int y) 
+void save_to_file(string filename,int ** board,int x,int y) {
     ofstream fout;                                // create a file output stream
     fout.open(filename);
     if (fout.fail()) {                            // in case error in opening external file occurs, prompt the player and jump to fout.close()
