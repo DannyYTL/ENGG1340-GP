@@ -1,12 +1,5 @@
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include <sstream>
-#include <random>
-#include <fstream>
-
-using namespace std;
-
+#include "gaming.h"
+/*
 void initialise_board(int **initial_board, int x, int y, int num_of_mine) {
 
         for ( int i=0; i<x; ++i){
@@ -63,7 +56,7 @@ void initialise_board(int **initial_board, int x, int y, int num_of_mine) {
         }
     }
 }
-///*
+
 void display(int ** &board, int x, int y, bool die, bool win){
     int value, i, j;
     cout << "\n    |"; 
@@ -74,8 +67,8 @@ void display(int ** &board, int x, int y, bool die, bool win){
             for (j=0; j<y; ++j){ value = board[i][j];
                 if (value == 99) cout << " 💀"; // 葬身之地
                 else if (value > 10) {  // 有数字的坑
-                /*1：蓝色，"\033[1;34m" 2：绿色，"\033[1;32m" 3：红色，"\033[1;31m" 4：紫色，"\033[1;35m" 5：黄色，"\033[1;33m" 6：青色，"\033[0;36m" 7：黑色，"\033[0;30m" 8：灰色，"\033[1;33m"
-                */
+                // 1：蓝色，"\033[1;34m" 2：绿色，"\033[1;32m" 3：红色，"\033[1;31m" 4：紫色，"\033[1;35m" 5：黄色，"\033[1;33m" 6：青色，"\033[0;36m" 7：黑色，"\033[0;30m" 8：灰色，"\033[1;33m"
+                
                     if(value == 11) cout << "\033[1;34m";
                     else if(value == 12) cout << "\033[1;32m";
                     else if(value == 13) cout << "\033[1;31m";
@@ -101,7 +94,7 @@ void display(int ** &board, int x, int y, bool die, bool win){
             cout<<endl;
         }//print test(to be delete)
 }
-//*/
+
 
 bool processing(int ** &board, int &x_max, int &y_max, char &mode, int x, int y){  // x: hor, y: ver,
     // mode: 'e': exacavate; 'f': flag; 'q': quit
@@ -266,7 +259,7 @@ void in_main(int ** initial_board,int x,int y) {
             cout<<"enter the mode and the coordinates! modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";
         }
         cout << "end testing"<<endl;
-}
+}*/// 改动 in_main.cpp 
 
 int main() {
 // customer input (separate function??) //
