@@ -3,13 +3,13 @@ Minesweeper game
 -------------------
 Group Members:
 
-Chen Yiren  3036264535
+Chen Yiren  - 3036264535
 
-Yao Tianle  3036253691
+Yao Tianle  - 3036253691
 
-Yu Junye    3036269016
+Yu Junye    - 3036269016
 
---------    30362-----
+Lau Yuyan   - 3036227214
 
 
 -------------
