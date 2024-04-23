@@ -14,9 +14,10 @@ Lau Yuyan   - 3036227214
 -------------
 List of features:
 1. The position of the mines on the board is randomly set, it varies in every new game.
-4. Players can load the previous playing record(board) when executing the code, and the game data will be automatically saved when the player quits.
-5. The codes are separated into 7 different files to ensure the "main.cpp" looks tidy and simple.
-
+2. The board is created using dynamic array, and every movement the players made is recorded on the board.
+3. Players can load the previous playing record(board) when executing the code, and the game data will be automatically saved when the player quits.
+4. The codes are separated into 7 different files to ensure the "main.cpp" looks tidy and simple.
+5. The functions and variables were named properly to allow easy reading and comprehension.
 
 -------------
 To play our game, all you need to do is downloading the files from GitHub and then type "make main" in your Linux environment.
