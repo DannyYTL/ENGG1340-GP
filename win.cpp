@@ -1,6 +1,6 @@
 #include "gaming.h"
 //Determining whether the game is won or not.
-//input parameters are: pointer to a 2D-array, int
+//input parameters are: pointer to a 2D-array, int x and y representing the size of board.
 //return boolean type true or false.
 bool win(int **board, int x, int y) {
     for (int i=0; i<x; ++i){
