@@ -1,6 +1,13 @@
 # ENGG1340-GP
 Minesweeper game
 
+Group Members:
+Chen Yiren  3036264535
+Yao Tianle  3036253691
+Yu Junye    3036269016
+--------    30362-----
+
+
 To play our game, all you need to do is downloading the files from github, and then type "make main" in your Linux environment.
 
 After make main, the main executable file will be generated. Execute the file by "./main", then the game will start running
