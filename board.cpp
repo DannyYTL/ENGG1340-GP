@@ -2,7 +2,7 @@
 
 //generate a hidden board contain mine and numbers.
 //input parameters are: pointer to the 2D array, size of the board (int x and y), number of mine in the board (int num_of_mine)
-//void function, no return type
+//void function, no return type, only handles the setting of board
 void initialise_board(int **initial_board, int x, int y, int num_of_mine) {
 
         for ( int i=0; i<x; ++i){  // fill the board with -1.
