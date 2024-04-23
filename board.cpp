@@ -1,11 +1,11 @@
 #include "gaming.h"
 
-
+//generate a hidden board contain mine and numbers.
 void initialise_board(int **initial_board, int x, int y, int num_of_mine) {
 
         for ( int i=0; i<x; ++i){
         for ( int j=0; j<y; ++j){
-            initial_board[i][j] = -1;//空格定义为-1
+            initial_board[i][j] = -1; // empty space defined as -1.
         }
     }
 
