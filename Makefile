@@ -2,7 +2,6 @@ FLAGS = -pedantic-errors -std=c++11
 TARGET = main
 OBJECTS = main.o board.o display.o file.o processing.o win.o in_main.o
 
-
 main.o: main.cpp gaming.h
 	g++ $(FLAGS) -c $<
 
@@ -30,7 +29,6 @@ $(TARGET): $(OBJECTS)
 
 clean:
 	rm -f *.o main
-	rm -rf .vscode
 
 tar:
 	tar -czvf main.tgz *.cpp *.h
