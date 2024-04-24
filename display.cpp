@@ -1,18 +1,21 @@
 #include "gaming.h"
 
-
-void display(int ** &board, int x, int y, bool die, bool win){
+// void function, no return type
+// input parameters are the pointer to dynamic 2D array of int pointers that stores the game board; x and y which are height and width of board of type integer respectively
+// boolean type die that indicates whether the player has died; boolean type win that indicates whether player wins the game
+// purpose: output the game board on terminal so let user see the current game status
+void display(int ** &board, int x, int y, bool die, bool win){        
     int value, i, j;
     cout << "\n    |"; 
     for (i=0; i<y; i++) cout<<setw(3)<<i;   cout<<"\n  ---"; 
     for (i=0; i<y; i++) cout<<"---";        cout<<endl;
-    for (i=0; i<x; ++i){//print test(to be delete)e
+    for (i=0; i<x; ++i){                                   
             cout<<setw(3)<<i<<" |";
             for (j=0; j<y; ++j){ value = board[i][j];
-                if (value == 99) cout << " 💀"; // 葬身之地
+                if (value == 99) cout << " 💀";             // place where player died
                 else if (value > 10) {  // 有数字的坑
-                /*1：蓝色，"\033[1;34m" 2：绿色，"\033[1;32m" 3：红色，"\033[1;31m" 4：紫色，"\033[1;35m" 5：黄色，"\033[1;33m" 6：青色，"\033[0;36m" 7：黑色，"\033[0;30m" 8：灰色，"\033[1;33m"
-                */
+                // 1：blue，"\033[1;34m" 2： green，"\033[1;32m" 3：red，"\033[1;31m" 4：purple，"\033[1;35m" 5：yellow，"\033[1;33m" 
+                // 6：cyan，"\033[0;36m" 7：black，"\033[0;30m" 8：grey，"\033[1;33m"
                     if(value == 11) cout << "\033[1;34m";
                     else if(value == 12) cout << "\033[1;32m";
                     else if(value == 13) cout << "\033[1;31m";
@@ -23,18 +26,18 @@ void display(int ** &board, int x, int y, bool die, bool win){
                     else if(value == 18) cout << "\033[1;33m";
                     cout<<setw(3)<<value-10 <<"\033[0m";
                     }
-                else if(value == 10) cout << "  _"; // 没数字的坑
+                else if(value == 10) cout << "  _";             // elements without number
                 else if(die && value == 9) cout << " 💣";
                 else if(value < 0){
-                    if (die && value!= -1) cout<< ' '<< u8"\U0001F3F4";  //死了之后并且旗子插错了，黑旗
-                    else cout << " 🚩";  // 插旗子
+                    if (die && value!= -1) cout<< ' '<< u8"\U0001F3F4";          // the player died adn wrong flag is placed, black flag
+                    else cout << " 🚩";                         // put a flag  
                 }
                 
                 else {
-                     if (win!=1)   cout<<"  ∎";        // 平地（没挖过的）
+                     if (win!=1)   cout<<"  ∎";                 // elements that have not been exvacuated 
                      else cout<<"  "<<board[i][j];
                 }
             }
             cout<<endl;
-        }//print test(to be delete)
+        }
 }
