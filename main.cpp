@@ -1,16 +1,16 @@
-#include "gaming.h"
+#include "gaming.h"                             // necessary header file
 
-int main() {
+int main() {                                    // the main function of this game
     string options;
     string xyl;
     int x=1, y=1, level=0;  
     cout << "what you want to do?\n New Game: N\n Load Game: L\n";
-    getline(cin,options);
-    while (options != "N" && options != "L") {
+    getline(cin,options);                                                // user input the mode, either 'N' or 'L'
+    while (options != "N" && options != "L") {                           // otherwises keep prompting the user for valid input mode
         cout << "Invalid option, please choose again ( N - new game; L - continue from last game ): " << endl;
         getline(cin,options);
     }    
-    if (options == "N") {
+    if (options == "N") {                                                // new game branch
         while( y<3 || y>300 ){
             cout << "The width of the board (3-300): ";
             cin>>xyl;        //get user input of board width
@@ -38,19 +38,19 @@ int main() {
         for ( int i=0; i<x; ++i){
             initial_board[i] = new int[y];
         }
-        initialise_board(initial_board, x, y, num_of_mine); // initialise the board
+        initialise_board(initial_board, x, y, num_of_mine);   // initialise the board
     //                  //
         display(initial_board, x, y, 0, 0);
-        in_main(initial_board,x,y);
+        in_main(initial_board,x,y);                           // call in_main to start the game
     }
-    else if (options == "L") {
+    else if (options == "L") {                                // Load last game branch
         int ** initial_board;
         int x,y;
-        initial_board = read_file("Record.txt",x,y);
+        initial_board = read_file("Record.txt",x,y);          // read the last game board from "Record.txt"
         x+=1;
         y+=1;
         display(initial_board, x, y, 0, 0);
-        in_main(initial_board,x,y);
+        in_main(initial_board,x,y);                           // call in_main to start the game
     }
     return 0;
 }
