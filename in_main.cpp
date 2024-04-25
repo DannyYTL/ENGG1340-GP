@@ -40,9 +40,9 @@ void in_main(int ** initial_board,int x,int y) {
                 cout << "you win\n";
                 break;
             }
-            display(initial_board, x, y, die, 0);
-            if(die){                                                      // if the user exvacuated a mine, player is considered dead, game over                                                                                                                                                                 
-                   cout <<  "█     █       █    █         ██████            █      █        █     █                                      █      █    █     █  █                   █            \n"        
+            
+            if(die){  cout<<"\033[1;31m\n"                                                    // if the user exvacuated a mine, player is considered dead, game over                                                                                                                                                                 
+                            "█     █       █    █         ██████            █      █        █     █                                      █      █    █     █  █                   █            \n"        
                             "████████     ███████      █████████████        █████████      ████████            ████████████████         █████████    ███████████████     ████████████████      \n"                      
                             " ████         ███      ████        █████        ████            ███               ████       ███████         ████        ███        ██       ████      ███████    \n"                     
                             "  ████       ██      ████            ████       ████            ███                ███           ████      █ ████        ███         █       ███           ████   \n"                  
@@ -57,11 +57,12 @@ void in_main(int ** initial_board,int x,int y) {
                             "       ███           █████           ████        ████          ██                  ███           ████        ████        ███          ██     ███           ████   \n"                  
                             "       ████            █████       ████           █████      ████                  ████       ██████         ████        ████        ███     ████        █████    \n"                  
                             "    ██████████           ████████████              ████████████  █              █████████████████         █████████   █████████████████   █████████████████       \n"                 
-                            "    ██      █               ██████                     █████                     █      █████              █      █    ██                  █     ██████           \n";                   
+                            "    ██      █               ██████                     █████                     █      █████              █      █    ██                  █     ██████           \n"<<"\033[0;30m"     
                                                                                                                                                                                                         
-                cout << "cai jiu duo lian\n";                              // friendly encouragement from the programmers :)
+                        << "cai jiu duo lian\n";                              // friendly encouragement from the programmers :)
+                display(initial_board, x, y, die, 0);
                 break;
-            }
+            }display(initial_board, x, y, die, 0);
             // the current action is ended, ask for user's next action
             cout<<"enter the mode and the coordinates! modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";       
         }
