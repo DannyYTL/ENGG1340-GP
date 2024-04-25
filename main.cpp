@@ -6,8 +6,17 @@ int main() {                                    // the main function of this gam
     int x=1, y=1, level=0;  
     cout << "what you want to do?\n New Game: N\n Load Game: L\n";
     getline(cin,options);                                                // user input the mode, either 'N' or 'L'
-    while (options != "N" && options != "L") {                           // otherwises keep prompting the user for valid input mode
-        cout << "Invalid option, please choose again ( N - new game; L - continue from last game ): " << endl;
+    while (options != "N") {                           // otherwises keep prompting the user for valid input mode
+        if (options == "L"){
+            ifstream fin;
+            fin.open("Record.txt");
+            if (fin.fail()) {                       // if file reading from external file fails, prompt the player and jump to fin.close()
+                cout << "No record";
+            }else break;
+
+        }
+        else cout << "Invalid option";
+        cout << ", please choose again ( N - new game; L - continue from last game ): " << endl;
         getline(cin,options);
     }    
     if (options == "N") {                                                // new game branch
