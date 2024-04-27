@@ -36,9 +36,9 @@ $(TARGET): $(OBJECTS)
 	@echo .
 
 clean:
-	rm -f $(TARGET) $(OBJECTS) Record.txt
+	rm -f $(TARGET) $(OBJECTS) Record.txt main.tgz
 
 tar:
-	tar -czvf main.tgz $(OBJECTS)
+	tar -czvf main.tgz *.cpp *.h Makefile
 
 .PHONY: clean tar
