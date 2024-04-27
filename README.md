@@ -40,5 +40,6 @@ The actions the player can choose: "e" - execute, "f" - flag, "q" -quit the game
 Winning condition: if all non-mine elements of the game board have been executed and all mines are flagged
 Losing condition: if one mine is being evacuated, you lose!
 
+Here is the youtube line for the video we make:             https://youtu.be/6PWCfxH__Ys
 
 Hope you enjoy our game, have fun !!!
