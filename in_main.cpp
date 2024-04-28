@@ -5,32 +5,30 @@
 // input parameters are: pointer to the 2D array of int pointers of game board (a dynamic 2D array); the height of board x and width of board y, both of type int
 // no return type, only handles the execution of game
 void in_main(int ** initial_board,int x,int y) {
-        string temp, mode_str;
-        char mode;
+        string temp, mode;
         int input_x=-1, input_y=-1;
         bool die = 0, valid=0;
     
         cout<<"enter the mode and the coordinates!" << endl;
         cout << "modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";
-
+        
         while(getline(cin,temp)){                            // store whole line of user input to temp
             istringstream iss(temp);                         // create an input string stream using string line in temp
-            iss >> mode_str >> input_x >> input_y;
-            mode = mode_str[0];
+            iss >> mode >> input_x >> input_y;
             //cout<< "mode: " << mode_str << ", len: " << mode_str.length() << endl;
-            if (mode_str.length() != 1 || mode != 'q' && mode != 'e' && mode != 'f'){                // only accepts mode in either of 'q' - quit, 'e' - evacuate, 'f' - flag
+            if (mode != "q" && mode != "e" && mode != "f"){                // only accepts mode in either of 'q' - quit, 'e' - evacuate, 'f' - flag
                 cout<<"Please enter a valid mode, modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";
                 input_x=999;
                 input_y=999;
                 continue;
             }
-            else if (mode != 'q' && (input_x < 0 || input_x >= y || input_y < 0 || input_y >= x)){             // if user does not quit the game and use mode 'e' or 'f'
+            else if (mode != "q" && (input_x < 0 || input_x >= y || input_y < 0 || input_y >= x)){             // if user does not quit the game and use mode 'e' or 'f'
                 cout<<"Please enter a valid coordinates, modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";                                                // valid coordinates within the board size are required
                 input_x=999;
                 input_y=999;
                 continue;
             }
-            if(mode=='q'){                                                 // if user quits the game, call save_to_file, current game board is stored in file "Record.txt"
+            if(mode=="q"){                                                 // if user quits the game, call save_to_file, current game board is stored in file "Record.txt"
                 save_to_file("Record.txt",initial_board,x,y);
                 cout << "Bye\n";
                 break;
