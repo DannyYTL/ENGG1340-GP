@@ -7,7 +7,7 @@
 void in_main(int ** initial_board,int x,int y) {
         string temp;
         char mode;
-        int input_x=999, input_y=999;
+        int input_x=-1, input_y=-1;
         bool die = 0, valid=0;
     
         cout<<"enter the mode and the coordinates!" << endl;
