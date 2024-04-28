@@ -15,7 +15,6 @@ void in_main(int ** initial_board,int x,int y) {
         while(getline(cin,temp)){                            // store whole line of user input to temp
             istringstream iss(temp);                         // create an input string stream using string line in temp
             iss >> mode >> input_x >> input_y;
-            //cout<< "mode: " << mode_str << ", len: " << mode_str.length() << endl;
             if (mode != "q" && mode != "e" && mode != "f"){                // only accepts mode in either of 'q' - quit, 'e' - evacuate, 'f' - flag
                 cout<<"Please enter a valid mode, modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";
                 input_x=999;
