@@ -12,7 +12,7 @@ void in_main(int ** initial_board,int x,int y) {
     
         cout<<"enter the mode and the coordinates!" << endl;
         cout << "modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";
-        //cin.ignore();                                        // avoid the situation in which next getline receives 'nothing' as input
+
         while(getline(cin,temp)){                            // store whole line of user input to temp
             istringstream iss(temp);                         // create an input string stream using string line in temp
             iss >> mode_str >> input_x >> input_y;
