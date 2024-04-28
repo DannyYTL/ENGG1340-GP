@@ -50,6 +50,7 @@ int main() {                                    // the main function of this gam
         initialise_board(initial_board, x, y, num_of_mine);   // initialise the board
     //                  //
         display(initial_board, x, y, 0, 0);
+        cin.ignore();
         in_main(initial_board,x,y);                           // call in_main to start the game
     }
     else if (options == "L") {                                // Load last game branch

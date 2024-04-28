@@ -5,25 +5,27 @@
 // input parameters are: pointer to the 2D array of int pointers of game board (a dynamic 2D array); the height of board x and width of board y, both of type int
 // no return type, only handles the execution of game
 void in_main(int ** initial_board,int x,int y) {
-        string temp;
+        string temp, mode_str;
         char mode;
         int input_x=-1, input_y=-1;
         bool die = 0, valid=0;
     
         cout<<"enter the mode and the coordinates!" << endl;
         cout << "modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";
-        cin.ignore();                                        // avoid the situation in which next getline receives 'nothing' as input
+        //cin.ignore();                                        // avoid the situation in which next getline receives 'nothing' as input
         while(getline(cin,temp)){                            // store whole line of user input to temp
             istringstream iss(temp);                         // create an input string stream using string line in temp
-            iss >> mode >> input_x >> input_y;
-            if (mode != 'q' && mode != 'e' && mode != 'f'){                // only accepts mode in either of 'q' - quit, 'e' - evacuate, 'f' - flag
-                cout<<"Please enter a valid mode"<<endl;
+            iss >> mode_str >> input_x >> input_y;
+            mode = mode_str[0];
+            //cout<< "mode: " << mode_str << ", len: " << mode_str.length() << endl;
+            if (mode_str.length() != 1 || mode != 'q' && mode != 'e' && mode != 'f'){                // only accepts mode in either of 'q' - quit, 'e' - evacuate, 'f' - flag
+                cout<<"Please enter a valid mode, modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";
                 input_x=999;
                 input_y=999;
                 continue;
             }
             else if (mode != 'q' && (input_x < 0 || input_x >= y || input_y < 0 || input_y >= x)){             // if user does not quit the game and use mode 'e' or 'f'
-                cout<<"Please enter a valid coordinates"<<endl;                                                // valid coordinates within the board size are required
+                cout<<"Please enter a valid coordinates, modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";                                                // valid coordinates within the board size are required
                 input_x=999;
                 input_y=999;
                 continue;
@@ -40,7 +42,7 @@ void in_main(int ** initial_board,int x,int y) {
                 cout << "you win\n";
                 break;
             }
-            
+            display(initial_board, x, y, die, 0);
             if(die){  cout<<"\033[1;31m\n"                                                    // if the user exvacuated a mine, player is considered dead, game over                                                                                                                                                                 
                             "█     █       █    █         ██████            █      █        █     █                                      █      █    █     █  █                   █            \n"        
                             "████████     ███████      █████████████        █████████      ████████            ████████████████         █████████    ███████████████     ████████████████      \n"                      
@@ -59,10 +61,9 @@ void in_main(int ** initial_board,int x,int y) {
                             "    ██████████           ████████████              ████████████  █              █████████████████         █████████   █████████████████   █████████████████       \n"                 
                             "    ██      █               ██████                     █████                     █      █████              █      █    ██                  █     ██████           \n"<<"\033[0;30m"     
                                                                                                                                                                                                         
-                        << "cai jiu duo lian\n";                              // friendly encouragement from the programmers :)
-                display(initial_board, x, y, die, 0);
+                        << "Better luck next time!\n";                              // friendly encouragement from the programmers :)
                 break;
-            }display(initial_board, x, y, die, 0);
+            }
             // the current action is ended, ask for user's next action
             cout<<"enter the mode and the coordinates! modes: 'e': excavate, 'f': flag, 'q': quit (e.g.: e x-axis y-axis)\n";       
         }
