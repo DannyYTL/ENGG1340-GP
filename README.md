@@ -20,7 +20,7 @@ List of features:
 5. The functions and variables were named properly to allow easy reading and comprehension.
 
 -------------
-To play our game, all you need to do is downloading the files from GitHub and then type "make main" in your Linux environment.
+To play our game, all you need to do is downloading the files from GitHub and then type "make main" under the game directory in your Linux environment.
 
 After "make main", the main executable file will be generated. Execute the file by "./main", then the game will start running
 
