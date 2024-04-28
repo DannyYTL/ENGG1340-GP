@@ -1,7 +1,6 @@
 #include "gaming.h"
 
-
-bool processing(int ** &board, int &x_max, int &y_max, char &mode, int x, int y){  // x: hor, y: ver,
+bool processing(int ** &board, int &x_max, int &y_max, string &mode, int x, int y){  // x: hor, y: ver,
     // mode: 'e': exacavate; 'f': flag; 'q': quit
     int value;
     if(x>=0 && x<x_max && y>=0 && y<y_max){
@@ -10,7 +9,7 @@ bool processing(int ** &board, int &x_max, int &y_max, char &mode, int x, int y)
         if(value >= 10){  // excavated
             return 0;
         }
-        if(mode == 'e'){
+        if(mode == "e"){
             if(value == 9){
                 cout<<"Booooooooom!\n";
                 board[x][y] = 99; // 葬身之地
@@ -26,7 +25,7 @@ bool processing(int ** &board, int &x_max, int &y_max, char &mode, int x, int y)
                 return 0;
             }// value < 0 
             return 0;
-        }if(mode == 'f'){
+        }if(mode == "f"){
             if (value>=0) board[x][y] -= 10;  // 插旗子
             else board[x][y] += 10; // 拔旗子
             return 0;
