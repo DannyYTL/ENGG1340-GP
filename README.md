@@ -37,6 +37,7 @@ If you choose "L" loading the last game:
 The actions the player can choose: "e" - excavate, "f" - flag, "q" -quit the game
 * Note that "e" and "f" require the player to also add the coordinates of the element in board they want to manipulate (e.g. "e 0 0")
 * Use 'e' to excavate an element in the game board; use 'f' to flag an element that you consider as a mine
+* After excavated an element, if a number is shown, it represents the number of mines in the elements that surround it
 
 Winning condition: if all non-mine elements of the game board have been executed and all mines are flagged
 Losing condition: if one mine is being evacuated, you lose!
